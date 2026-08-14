@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreamDigital - Abonnements Netflix, Prime Video & Services Telegram</title>
+  
+  <!-- Google Fonts & Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              red: '#E50914',
+              blue: '#00A8E1',
+              telegram: '#229ED9',
+              orange: '#FF6600',
+              emerald: '#10B981'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4, .font-display { font-family: 'Outfit', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col transition-colors duration-300 antialiased">
+
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-30 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 via-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-red-500/20">
+          <i class="fa-solid fa-play text-base"></i>
+        </div>
+        <div>
+          <span class="font-display font-extrabold text-xl tracking-tight text-white block leading-none">StreamDigital</span>
+          <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">Abonnements & Services Express</span>
+        </div>
+      </div>
+
+      <!-- Quick Contact & Cart Buttons -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- WhatsApp Quick Order -->
+        <a href="https://wa.me/22870403663?text=Bonjour%20je%20souhaite%20commander%20un%20abonnement" target="_blank" class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md shadow-emerald-600/20 transition-all">
+          <i class="fa-brands fa-whatsapp text-sm"></i>
+          <span>Commander par WhatsApp</span>
+        </a>
+
+        <!-- Cart Button -->
+        <button onclick="toggleCartDrawer(true)" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition-all">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Panier</span>
+          <span id="cartBadge" class="w-5 h-5 rounded-full bg-white text-indigo-700 text-xs font-extrabold flex items-center justify-center ml-1">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-b from-slate-900 to-slate-950 border-b border-slate-800/80 py-10 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">
+        <i class="fa-solid fa-bolt mr-1"></i> Livraison instantanée par SMS / WhatsApp
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white font-display mb-3">Vos Abonnements Streaming & Services au Meilleur Prix</h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">Paiement facile et sécurisé par <strong class="text-amber-400">Mixx by Yas</strong> ou <strong class="text-sky-400">Moov Money</strong>. Service disponible 24h/24 et 7j/7.</p>
+
+      <!-- Trust Badges -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mt-6 text-xs text-slate-300 font-semibold">
+        <span class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl"><i class="fa-solid fa-shield-check text-emerald-400"></i> Comptes 100% Garantis</span>
+        <span class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl"><i class="fa-solid fa-bolt text-amber-400"></i> Activation en 5 minutes</span>
+        <span class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl"><i class="fa-brands fa-whatsapp text-emerald-400"></i> Support client direct</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Products Catalog -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-10">
+
+    <h2 class="text-2xl font-bold text-white font-display mb-6 flex items-center gap-3">
+      <i class="fa-solid fa-fire text-rose-500"></i> Nos Offres Principales
+    </h2>
+
+    <!-- Grid of the 3 requested products -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- 1. NETFLIX PRODUCT -->
+      <div class="bg-slate-900 border border-red-500/40 rounded-3xl p-6 flex flex-col justify-between relative shadow-xl hover:border-red-500 transition-all group">
+        <span class="absolute -top-3 left-6 bg-red-600 text-white font-extrabold text-[10px] uppercase px-3 py-1 rounded-full shadow-md tracking-wider">
+          <i class="fa-solid fa-star mr-1"></i> TOP VENTES
+        </span>
+
+        <div>
+          <!-- Netflix Logo -->
+          <div class="w-full h-12 mb-4 flex items-center">
+            <svg viewBox="0 0 1024 276" class="h-10 w-auto group-hover:scale-105 transition-transform" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M140.803 258.904c-15.404 2.705-31.079 3.516-47.294 5.676L44.051 119.724v151.073C28.647 272.418 14.594 274.58 0 276.742V0h41.08l56.212 157.021V0h43.511v258.904zm85.131-157.558c16.757 0 42.431-.811 57.835-.811v43.24c-19.189 0-41.619 0-57.835.811v64.322c25.405-1.621 50.809-3.785 76.482-4.596v41.617l-119.724 9.461V0h119.724v43.241h-76.482v58.105zm237.284-58.104h-44.862V242.15c-14.594 0-29.188 0-43.239.539V43.242h-44.862V0H463.22l-.002 43.242zm70.266 55.132h59.187v43.24h-59.187v98.104h-42.972V0h120.635v43.241h-77.663v55.133zm148.641 103.507c24.594.539 49.456 2.434 73.51 3.783V249.1l-116.75-9.461V0h43.24v201.881zm109.994 49.457c13.783.812 28.377 1.623 42.43 3.242V0h-42.43v251.338zM1024 0l-54.863 131.615L1024 276.742c-16.217-2.162-32.432-5.135-48.648-7.838l-31.078-79.994-31.617 73.51c-15.678-2.705-30.812-3.516-46.484-5.678l55.672-126.204L871.334 0h46.483l28.377 72.699L976.889 0H1024z" fill="#E50914"/>
+            </svg>
+          </div>
+
+          <h3 class="text-xl font-bold text-white font-display">Abonnement Netflix Premium</h3>
+          <p class="text-xs text-red-400 font-semibold mt-1 mb-4">Accès 1 Mois complet • Écran Privé 4K Ultra HD</p>
+          <p class="text-slate-400 text-xs mb-6 leading-relaxed">Profitez de toutes vos séries et films préférés en qualité 4K UHD. Compte personnel avec code PIN et garantie 30 jours.</p>
+
+          <!-- Price Tag -->
+          <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-6 flex items-baseline justify-between">
+            <span class="text-xs text-slate-400">Tarif Mensuel:</span>
+            <div class="text-right">
+              <span class="text-2xl font-extrabold text-white font-display">2 000 FCFA</span>
+              <span class="text-[10px] text-slate-400 block">/ mois</span>
+            </div>
+          </div>
+
+          <!-- Features Checklist -->
+          <ul class="space-y-2.5 text-xs text-slate-300 mb-6">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Qualité 4K Ultra HD & HDR</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Profil privé avec code PIN</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Téléchargement hors ligne inclus</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Garantie de remplacement 30j</li>
+          </ul>
+        </div>
+
+        <button onclick="addToCart('netflix-1m', 'Abonnement Netflix Premium (1 Mois)', 2000)" class="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-red-600/30 transition-all text-sm flex items-center justify-center gap-2">
+          <i class="fa-solid fa-cart-plus"></i>
+          <span>Commander pour 2 000 FCFA</span>
+        </button>
+      </div>
+
+      <!-- 2. PRIME VIDEO PRODUCT -->
+      <div class="bg-slate-900 border border-sky-500/40 rounded-3xl p-6 flex flex-col justify-between relative shadow-xl hover:border-sky-500 transition-all group">
+        <span class="absolute -top-3 left-6 bg-sky-500 text-slate-950 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full shadow-md tracking-wider">
+          <i class="fa-solid fa-tag mr-1"></i> MEILLEUR PRIX
+        </span>
+
+        <div>
+          <!-- Prime Video Logo -->
+          <div class="w-full h-12 mb-4 flex items-center">
+            <svg viewBox="0 0 400 100" class="h-10 w-auto group-hover:scale-105 transition-transform" xmlns="http://www.w3.org/2000/svg">
+              <text x="0" y="42" font-family="Outfit, sans-serif" font-size="38" font-weight="800" fill="#00A8E1">prime video</text>
+              <path d="M10 65 C 80 90, 200 95, 350 60" stroke="#00A8E1" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <polygon points="345,50 365,58 345,66" fill="#00A8E1"/>
+            </svg>
+          </div>
+
+          <h3 class="text-xl font-bold text-white font-display">Pass Amazon Prime Video</h3>
+          <p class="text-xs text-sky-400 font-semibold mt-1 mb-4">Accès 6 Mois complets • Full HD & 4K</p>
+          <p class="text-slate-400 text-xs mb-6 leading-relaxed">Accédez à l'ensemble du catalogue Prime Video (Films, Séries, Matchs) pendant 6 mois entiers sans interruption.</p>
+
+          <!-- Price Tag -->
+          <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-6 flex items-baseline justify-between">
+            <span class="text-xs text-slate-400">Tarif 6 Mois:</span>
+            <div class="text-right">
+              <span class="text-2xl font-extrabold text-white font-display">3 000 FCFA</span>
+              <span class="text-[10px] text-emerald-400 block font-bold">Économie de 60%</span>
+            </div>
+          </div>
+
+          <!-- Features Checklist -->
+          <ul class="space-y-2.5 text-xs text-slate-300 mb-6">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Durée totale 6 Mois continus</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Multi-écrans (TV, Phone, PC)</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Langue en Français & VOSTFR</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Support et assistance garantie</li>
+          </ul>
+        </div>
+
+        <button onclick="addToCart('prime-6m', 'Pass Prime Video (6 Mois)', 3000)" class="w-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold py-3.5 rounded-xl shadow-lg shadow-sky-500/25 transition-all text-sm flex items-center justify-center gap-2">
+          <i class="fa-solid fa-cart-plus"></i>
+          <span>Commander pour 3 000 FCFA</span>
+        </button>
+      </div>
+
+      <!-- 3. TELEGRAM RECOVERY PRODUCT -->
+      <div class="bg-slate-900 border border-sky-400/40 rounded-3xl p-6 flex flex-col justify-between relative shadow-xl hover:border-sky-400 transition-all group">
+        <span class="absolute -top-3 left-6 bg-sky-400 text-slate-950 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full shadow-md tracking-wider">
+          <i class="fa-solid fa-user-shield mr-1"></i> SERVICE EXPRESS
+        </span>
+
+        <div>
+          <!-- Icon Header -->
+          <div class="w-14 h-14 rounded-2xl bg-sky-400/10 text-sky-400 border border-sky-400/30 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            <i class="fa-brands fa-telegram"></i>
+          </div>
+
+          <h3 class="text-xl font-bold text-white font-display">Assistance & Récupération Telegram</h3>
+          <p class="text-xs text-sky-300 font-semibold mt-1 mb-4">Service d'assistance technique de compte</p>
+          <p class="text-slate-400 text-xs mb-6 leading-relaxed">Assistance rapide pour récupérer l'accès à votre compte Telegram bloqué, perdu ou non reçu par SMS, et sécurisation 2FA.</p>
+
+          <!-- Price Tag -->
+          <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-6 flex items-baseline justify-between">
+            <span class="text-xs text-slate-400">Tarif Prestation:</span>
+            <div class="text-right">
+              <span class="text-2xl font-extrabold text-white font-display">2 000 FCFA</span>
+              <span class="text-[10px] text-slate-400 block">/ intervention</span>
+            </div>
+          </div>
+
+          <!-- Features Checklist -->
+          <ul class="space-y-2.5 text-xs text-slate-300 mb-6">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Récupération du code SMS / Appel</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Déblocage d'accès et réinitialisation</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Activation Sécurité Double Facteur (2FA)</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Traitement rapide sous 15 minutes</li>
+          </ul>
+        </div>
+
+        <button onclick="addToCart('telegram-service', 'Récupération Compte Telegram', 2000)" class="w-full bg-sky-400 hover:bg-sky-300 text-slate-950 font-extrabold py-3.5 rounded-xl shadow-lg shadow-sky-400/25 transition-all text-sm flex items-center justify-center gap-2">
+          <i class="fa-solid fa-cart-plus"></i>
+          <span>Commander pour 2 000 FCFA</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- HOWDY VPN SECTION -->
+    <h2 class="text-2xl font-bold text-white font-display mt-14 mb-6 flex items-center gap-3">
+      <i class="fa-solid fa-shield-halved text-emerald-400"></i> Internet Illimité — Fichiers Howdy VPN
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- HOWDY VPN 1 SEMAINE -->
+      <div class="bg-slate-900 border border-emerald-500/40 rounded-3xl p-6 flex flex-col justify-between relative shadow-xl hover:border-emerald-500 transition-all group">
+        <span class="absolute -top-3 left-6 bg-emerald-500 text-slate-950 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full shadow-md tracking-wider">
+          <i class="fa-solid fa-bolt mr-1"></i> PETIT BUDGET
+        </span>
+
+        <div>
+          <!-- Howdy VPN Logo -->
+          <div class="w-full mb-4 flex items-center">
+            <img src="howdy_vpn_logo.png" alt="Howdy VPN Logo" class="h-14 w-auto rounded-xl group-hover:scale-105 transition-transform">
+          </div>
+
+          <h3 class="text-xl font-bold text-white font-display">Howdy VPN — 1 Semaine</h3>
+          <p class="text-xs text-emerald-400 font-semibold mt-1 mb-4">Fichier de connexion internet illimité • Validité 7 jours</p>
+          <p class="text-slate-400 text-xs mb-6 leading-relaxed">Recevez votre fichier de configuration Howdy VPN prêt à l'emploi. Connectez-vous et profitez d'internet illimité sur votre téléphone Android pendant 1 semaine entière.</p>
+
+          <!-- Price Tag -->
+          <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-6 flex items-baseline justify-between">
+            <span class="text-xs text-slate-400">Tarif 1 Semaine:</span>
+            <div class="text-right">
+              <span class="text-2xl font-extrabold text-white font-display">500 FCFA</span>
+              <span class="text-[10px] text-slate-400 block">/ 7 jours</span>
+            </div>
+          </div>
+
+          <!-- Features Checklist -->
+          <ul class="space-y-2.5 text-xs text-slate-300 mb-6">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Internet illimité 24h/24 et 7j/7</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Compatible réseau <strong class="text-emerald-400">Moov uniquement</strong></li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Fichier envoyé par WhatsApp en 5 min</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Guide d'installation inclus</li>
+          </ul>
+        </div>
+
+        <button onclick="addToCart('howdy-1w', 'Howdy VPN — 1 Semaine (7 jours)', 500)" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-3.5 rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-sm flex items-center justify-center gap-2">
+          <i class="fa-solid fa-cart-plus"></i>
+          <span>Commander pour 500 FCFA</span>
+        </button>
+      </div>
+
+      <!-- HOWDY VPN 1 MOIS -->
+      <div class="bg-slate-900 border border-violet-500/40 rounded-3xl p-6 flex flex-col justify-between relative shadow-xl hover:border-violet-500 transition-all group">
+        <span class="absolute -top-3 left-6 bg-violet-500 text-white font-extrabold text-[10px] uppercase px-3 py-1 rounded-full shadow-md tracking-wider">
+          <i class="fa-solid fa-star mr-1"></i> MEILLEUR RAPPORT QUALITÉ-PRIX
+        </span>
+
+        <div>
+          <!-- Howdy VPN Logo -->
+          <div class="w-full mb-4 flex items-center">
+            <img src="howdy_vpn_logo.png" alt="Howdy VPN Logo" class="h-14 w-auto rounded-xl group-hover:scale-105 transition-transform">
+          </div>
+
+          <h3 class="text-xl font-bold text-white font-display">Howdy VPN — 1 Mois</h3>
+          <p class="text-xs text-violet-400 font-semibold mt-1 mb-4">Fichier de connexion internet illimité • Validité 30 jours</p>
+          <p class="text-slate-400 text-xs mb-6 leading-relaxed">Le meilleur deal ! Profitez d'un mois complet d'internet illimité grâce à votre fichier Howdy VPN. Économisez 50% par rapport à l'offre hebdomadaire.</p>
+
+          <!-- Price Tag -->
+          <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-6 flex items-baseline justify-between">
+            <span class="text-xs text-slate-400">Tarif 1 Mois:</span>
+            <div class="text-right">
+              <span class="text-2xl font-extrabold text-white font-display">1 000 FCFA</span>
+              <span class="text-[10px] text-emerald-400 block font-bold">Économie de 50% vs hebdo</span>
+            </div>
+          </div>
+
+          <!-- Features Checklist -->
+          <ul class="space-y-2.5 text-xs text-slate-300 mb-6">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Internet illimité pendant 30 jours</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Compatible réseau <strong class="text-emerald-400">Moov uniquement</strong></li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Fichier envoyé par WhatsApp en 5 min</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Support technique inclus + guide</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Remplacement gratuit en cas de coupure</li>
+          </ul>
+        </div>
+
+        <button onclick="addToCart('howdy-1m', 'Howdy VPN — 1 Mois (30 jours)', 1000)" class="w-full bg-violet-500 hover:bg-violet-400 text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-violet-500/25 transition-all text-sm flex items-center justify-center gap-2">
+          <i class="fa-solid fa-cart-plus"></i>
+          <span>Commander pour 1 000 FCFA</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Payment Options Banner -->
+    <div class="mt-12 bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center">
+      <h3 class="text-base font-bold text-white mb-2 font-display">Moyens de paiement acceptés</h3>
+      <p class="text-slate-400 text-xs mb-4">Payez rapidement et en toute sécurité par Mobile Money</p>
+      
+      <div class="flex flex-wrap items-center justify-center gap-6 text-sm font-bold">
+        <span class="px-5 py-3 bg-slate-950 border border-amber-500/30 rounded-2xl flex items-center gap-3 shadow-md hover:scale-105 transition-transform">
+          <img src="mixx_by_yas_logo.png" alt="Mixx by Yas Logo" class="h-10 w-auto max-w-[80px] object-cover rounded-md">
+          <div class="text-left">
+            <span class="block text-white font-extrabold">Mixx by Yas</span>
+            <span class="text-[10px] text-amber-400 font-medium">Paiement mobile rapide</span>
+          </div>
+        </span>
+        <span class="px-5 py-3 bg-slate-950 border border-sky-500/30 rounded-2xl flex items-center gap-3 shadow-md hover:scale-105 transition-transform">
+          <img src="moov_money_logo.png" alt="Moov Money Logo" class="h-10 w-auto max-w-[80px] object-cover rounded-md">
+          <div class="text-left">
+            <span class="block text-white font-extrabold">Moov Money</span>
+            <span class="text-[10px] text-sky-400 font-medium">Transfert instantané</span>
+          </div>
+        </span>
+      </div>
+    </div>
+  </main>
+
+  <!-- CART SIDE DRAWER -->
+  <div id="cartDrawer" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end">
+    <div class="bg-slate-900 w-full max-w-md h-full flex flex-col border-l border-slate-800 shadow-2xl">
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+        <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+          <i class="fa-solid fa-cart-shopping text-indigo-400"></i> Votre Panier
+        </h3>
+        <button onclick="toggleCartDrawer(false)" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-3">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="p-5 border-t border-slate-800 bg-slate-900/90 space-y-3">
+        <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800">
+          <span>Total à payer:</span>
+          <span id="totalText" class="text-emerald-400 text-lg">0 FCFA</span>
+        </div>
+
+        <a id="whatsappOrderBtn" href="#" target="_blank" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-3.5 rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-sm flex items-center justify-center gap-2">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span>Commander sur WhatsApp (+228 70 40 36 63)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkoutModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 relative shadow-2xl">
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <h3 class="text-xl font-bold text-white font-display mb-1 flex items-center gap-2">
+        <i class="fa-solid fa-mobile-screen-button text-emerald-400"></i> Règlement de votre commande
+      </h3>
+      <p class="text-xs text-slate-400 mb-4">Saisissez vos coordonnées pour recevoir votre compte / service instantanément.</p>
+
+      <form onsubmit="handlePlaceOrder(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Votre Nom & Prénom</label>
+          <input type="text" id="custName" required placeholder="Ex: Jean Dupont" class="w-full bg-slate-800 border border-slate-700 text-white p-2.5 rounded-xl">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Numéro WhatsApp ou Téléphone (pour réception)</label>
+          <input type="tel" id="custPhone" required placeholder="Ex: +225 0700000000 / +221 770000000" class="w-full bg-slate-800 border border-slate-700 text-white p-2.5 rounded-xl font-mono">
+        </div>
+
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Choisissez votre mode de paiement</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-3 p-3 bg-slate-800 border border-amber-500/40 rounded-xl cursor-pointer hover:border-amber-400 transition-all">
+              <input type="radio" name="payMethod" checked class="accent-amber-500">
+              <img src="mixx_by_yas_logo.png" alt="Mixx by Yas" class="h-7 w-auto max-w-[50px] object-cover rounded">
+              <span class="font-bold text-amber-400">Mixx by Yas</span>
+            </label>
+            <label class="flex items-center gap-3 p-3 bg-slate-800 border border-sky-500/40 rounded-xl cursor-pointer hover:border-sky-400 transition-all">
+              <input type="radio" name="payMethod" class="accent-sky-500">
+              <img src="moov_money_logo.png" alt="Moov Money" class="h-7 w-auto max-w-[50px] object-cover rounded">
+              <span class="font-bold text-sky-400">Moov Money</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center text-sm font-bold">
+          <span>Montant Total:</span>
+          <span id="modalTotalText" class="text-emerald-400">0 FCFA</span>
+        </div>
+
+        <button type="submit" id="paySubmitBtn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-3.5 rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-sm">
+          Valider et Recevoir mes accès
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div id="orderSuccessModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-8 text-center shadow-2xl">
+      <div class="w-20 h-20 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto mb-4 text-4xl">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h3 class="text-2xl font-bold text-white font-display mb-2">Commande Reçue !</h3>
+      <p class="text-slate-300 text-sm mb-2">Vos identifiants et accès vous sont envoyés par SMS / WhatsApp dans un instant.</p>
+      <p class="text-xs text-emerald-400 font-mono font-bold mb-6">Référence: <span id="successOrderId">CMD-894215</span></p>
+      <button onclick="closeSuccessModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl">
+        Retour à l'accueil
+      </button>
+    </div>
+  </div>
+
+  <!-- JS Engine -->
+  <script>
+    let cart = [];
+
+    function addToCart(id, title, price) {
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ id, title, price, quantity: 1 });
+      }
+      updateCart();
+      toggleCartDrawer(true);
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCart();
+    }
+
+    function updateCart() {
+      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cartBadge').innerText = totalCount;
+
+      const container = document.getElementById('cartItemsList');
+      if (cart.length === 0) {
+        container.innerHTML = `<div class="py-12 text-center text-slate-400 text-xs">Votre panier est vide.</div>`;
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="bg-slate-800 border border-slate-700 rounded-xl p-3 flex justify-between items-center text-xs">
+            <div>
+              <div class="font-bold text-white">${item.title}</div>
+              <div class="text-emerald-400 font-bold mt-0.5">${(item.price * item.quantity).toLocaleString()} FCFA (${item.price.toLocaleString()} FCFA x ${item.quantity})</div>
+            </div>
+            <button onclick="removeFromCart('${item.id}')" class="text-slate-400 hover:text-rose-400 p-1">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        `).join('');
+      }
+
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      document.getElementById('totalText').innerText = `${total.toLocaleString()} FCFA`;
+      document.getElementById('modalTotalText').innerText = `${total.toLocaleString()} FCFA`;
+
+      // Update WhatsApp Order Link
+      const orderSummary = cart.map(i => `- ${i.title} (${i.quantity}x)`).join('%0A');
+      const waUrl = `https://wa.me/22870403663?text=Bonjour%20je%20souhaite%20commander:%0A${orderSummary}%0ATotal:%20${total.toLocaleString()}%20FCFA`;
+      document.getElementById('whatsappOrderBtn').href = waUrl;
+    }
+
+    function toggleCartDrawer(show) {
+      document.getElementById('cartDrawer').classList.toggle('hidden', !show);
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        alert('Votre panier est vide !');
+        return;
+      }
+      toggleCartDrawer(false);
+      document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+    function handlePlaceOrder(e) {
+      e.preventDefault();
+      const btn = document.getElementById('paySubmitBtn');
+      btn.innerText = 'Traitement en cours...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        cart = [];
+        updateCart();
+        closeCheckoutModal();
+
+        btn.innerText = 'Valider et Recevoir mes accès';
+        btn.disabled = false;
+
+        document.getElementById('successOrderId').innerText = `CMD-${Math.floor(100000 + Math.random() * 900000)}`;
+        document.getElementById('orderSuccessModal').classList.remove('hidden');
+      }, 1200);
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('orderSuccessModal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
